@@ -8,7 +8,7 @@ lint:
 
 
 alu:
-	verilator --assert -I./rtl --Wall --trace --cc ./rtl/alu.v --exe tests/alu_tb.cpp 
+	verilator --assert -I./rtl --Wall --trace --cc ./rtl/alu.v --exe tests/alu_tb.cpp
 	make -C obj_dir/ -f Valu.mk Valu
 
 run_alu: alu

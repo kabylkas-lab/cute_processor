@@ -6,14 +6,14 @@
 #include "Valu.h"
 
 // C++ libraries.
-#include "stdlib.h" //rand
+#include "stdlib.h"
 #include <iostream>
 
 // Verilator libraries.
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
-typedef Valu dut_type;
+using dut_type = Valu;
 
 const uint32_t kSimIter = 1000;
 uint32_t global_time = 0;
@@ -47,7 +47,7 @@ int main() {
     input_package inp;
     output_package out;
 
-    int iter = SIM_ITER;
+    int iter = kSimIter;
     while(iter > 0)
     {
         //generate input package
