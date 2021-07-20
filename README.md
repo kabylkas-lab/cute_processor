@@ -8,6 +8,7 @@ This project is inspired by Altera's lab and implements the following design in 
 ## Requirements
 * make
 * verilator
+* gtkwave (for waveform viewing)
 
 ## Build
 `make all`
