@@ -1,4 +1,4 @@
-module m81(output out, input a, b, c, d, e, f, g, h, i, j, c1, c2, c3, c4);
+module m101(output out, input a, b, c, d, e, f, g, h, i, j, c1, c2, c3, c4);
 assign c1bar=~c1;
 assign c2bar=~c2;
 assign c3bar=~c3;
