@@ -13,7 +13,7 @@ alu:
 	
 	
 mux:
-	verilator --assert -I./rtl --Wall --trace --cc ./rtl/mux1.v --exe tests/mux_tb.cpp
+	verilator --assert -I./rtl --Wall --trace --cc ./rtl/mux.v --exe tests/mux_tb.cpp
 	make -C obj_dir/ -f Vmux.mk Vmux
 	
 run_alu: alu

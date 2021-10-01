@@ -74,37 +74,37 @@ int main() {
             if(!inp.c2) {
 				if(!inp.c3) {
 					if(!inp.c4) {
-						out.otp = (int)in.a
+						out.otp = (int)inp.a;
 					} else {
-						out.otp = (int)in.b
+						out.otp = (int)inp.b;
 					}
 				} else {
 					if(!inp.c4) {
-						out.otp = (int)in.c
+						out.otp = (int)inp.c;
 					} else {
-						out.otp = (int)in.d
+						out.otp = (int)inp.d;
 					}
 				}
 			} else {
 				if(!inp.c3) {
 					if(!inp.c4) {
-						out.otp = (int)in.e
+						out.otp = (int)inp.e;
 					} else {
-						out.otp = (int)in.f
+						out.otp = (int)inp.f;
 					}
 				} else {
 					if(!inp.c4) {
-						out.otp = (int)in.g
+						out.otp = (int)inp.g;
 					} else {
-						out.otp = (int)in.h
+						out.otp = (int)inp.h;
 					}
 				}
 			}
         } else {
             if(!inp.c4) {
-				out.otp = (int)in.i
+				out.otp = (int)inp.i;
 			} else {
-				out.otp = (int)in.j
+				out.otp = (int)inp.j;
 			}
         }
 
@@ -126,11 +126,7 @@ int main() {
         top->eval();
 
         if(top->otp != out.otp) {
-            std::cout << "Error: op= " << inp.op << "; ";
-            std::cout << "inp.a = " << (uint16_t)inp.a << "; ";
-            std::cout << "inp.b = " << (uint16_t)inp.b << "; ";
-            std::cout << "top->c = " << (uint16_t)top->otp << "; ";
-            std::cout << "out.otp = " << (uint16_t)out.otp << std::endl;
+            std::cout << "Error!" << std::endl;
         }
 
         //sim iteration 
