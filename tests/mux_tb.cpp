@@ -123,7 +123,7 @@ int main() {
         top->c2 = (int)inp.c2;
         top->c3 = (int)inp.c3;
         top->c4 = (int)inp.c4;
-        top->eval();
+        advance_sim(top, trace);
 
         if(top->otp != out.otp) {
             std::cout << "Error!" << std::endl;
