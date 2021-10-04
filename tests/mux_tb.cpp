@@ -22,7 +22,6 @@ struct input_package {
 	//input buses
 	bool a,b,c,d,e,f,g,h,i,j = false;
 	//control switches
-	bool c1, c2, c3, c4 = false;
 	unsigned int ctrlVar : 4;
 };
 
@@ -107,47 +106,6 @@ int main() {
 				break;
 		}
 
-     /*   //generate output package
-        if(!inp.c1) {
-            if(!inp.c2) {
-				if(!inp.c3) {
-					if(!inp.c4) {
-						out.otp = (int)inp.a;
-					} else {
-						out.otp = (int)inp.b;
-					}
-				} else {
-					if(!inp.c4) {
-						out.otp = (int)inp.c;
-					} else {
-						out.otp = (int)inp.d;
-					}
-				}
-			} else {
-				if(!inp.c3) {
-					if(!inp.c4) {
-						out.otp = (int)inp.e;
-					} else {
-						out.otp = (int)inp.f;
-					}
-				} else {
-					if(!inp.c4) {
-						out.otp = (int)inp.g;
-					} else {
-						out.otp = (int)inp.h;
-					}
-				}
-			}
-        } else {
-            if(!inp.c4) {
-				out.otp = (int)inp.i;
-			} else {
-				out.otp = (int)inp.j;
-			}
-        }  */
-		
-		
-
         //feed data
         top->a = (int)inp.a;
         top->b = (int)inp.b;
@@ -158,13 +116,9 @@ int main() {
         top->g = (int)inp.g;
         top->h = (int)inp.h;
         top->i = (int)inp.i;
-        top->j = (int)inp.j;/*
-        top->c1 = (int)inp.c1;
-        top->c2 = (int)inp.c2;
-        top->c3 = (int)inp.c3;
-        top->c4 = (int)inp.c4;*/
-		top->ctrlVar = inp.ctrlVar;
-		advance_sim(top, trace);
+        top->j = (int)inp.j;
+	top->ctrlVar = inp.ctrlVar;
+	advance_sim(top, trace);
         top->eval();
 
         if(top->otp != out.otp) {
