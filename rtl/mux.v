@@ -1,5 +1,6 @@
 module mux(otp, a, b, c, d, e, f, g, h, i, j, ctrlVar);
-input wire a, b, c, d, e, f, g, h, i, j, ctrlVar;
+input wire a, b, c, d, e, f, g, h, i, j;
+input [3:0] ctrlVar;
 output reg otp;
 
 always@(*)
