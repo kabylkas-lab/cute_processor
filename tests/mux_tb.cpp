@@ -72,9 +72,9 @@ int main() {
 		inp.c3 = (bool)(rand()%2);
 		inp.c4 = (bool)(rand()%2);
 		
-		ctrlVar = rand() % 10;
+		inp.ctrlVar = rand() % 10;
 		
-		switch (ctrlVar){
+		switch (inp.ctrlVar){
 			case 0:
 				out.otp = (int)inp.a;
 				break;
@@ -189,4 +189,4 @@ int main() {
 
     trace->close();
 }
-*/
+
