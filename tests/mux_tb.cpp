@@ -65,45 +65,40 @@ int main() {
         inp.i = (bool)(rand()%2);
         inp.j = (bool)(rand()%2);
 		
-		//control switches
-        inp.c1 = (bool)(rand()%2);
-		inp.c2 = (bool)(rand()%2);
-		inp.c3 = (bool)(rand()%2);
-		inp.c4 = (bool)(rand()%2);
+	//control switches
+	inp.ctrlVar = rand() % 10;
 		
-		inp.ctrlVar = rand() % 10;
-		
-		switch (inp.ctrlVar){
-			case 0:
-				out.otp = (int)inp.a;
-				break;
-			case 1:
-				out.otp = (int)inp.b;
-				break;
-			case 2:
-				out.otp = (int)inp.c;
-				break;
-			case 3:
-				out.otp = (int)inp.d;
-				break;
-			case 4:
-				out.otp = (int)inp.e;
-				break;
-			case 5:
-				out.otp = (int)inp.f;
-				break;
-			case 6:
-				out.otp = (int)inp.g;
-				break;
-			case 7:
-				out.otp = (int)inp.h;
-				break;
-			case 8:
-				out.otp = (int)inp.i;
-				break;
-			case 9:
-				out.otp = (int)inp.j;
-				break;
+	switch (inp.ctrlVar){
+		case 0:
+			out.otp = (int)inp.a;
+			break;
+		case 1:
+			out.otp = (int)inp.b;
+			break;
+		case 2:
+			out.otp = (int)inp.c;
+			break;
+		case 3:
+			out.otp = (int)inp.d;
+			break;
+		case 4:
+			out.otp = (int)inp.e;
+			break;
+		case 5:
+			out.otp = (int)inp.f;
+			break;
+		case 6:
+			out.otp = (int)inp.g;
+			break;
+		case 7:
+			out.otp = (int)inp.h;
+			break;
+		case 8:
+			out.otp = (int)inp.i;
+			break;
+		case 9:
+			out.otp = (int)inp.j;
+			break;
 		}
 
         //feed data
