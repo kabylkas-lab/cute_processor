@@ -15,7 +15,7 @@
 
 using dut_type = Vmux;
 
-const uint32_t kSimIter = 1000;
+const uint32_t kSimIter = 100;
 uint32_t global_time = 0;
 
 struct input_package {
@@ -23,11 +23,14 @@ struct input_package {
 	bool a,b,c,d,e,f,g,h,i,j = false;
 	//control switches
 	bool c1, c2, c3, c4 = false;
+	unsigned int ctrlVar : 4;
 };
 
 struct output_package {
     uint8_t otp = 0;
 };
+
+
 
 static void advance_sim(dut_type* top, VerilatedVcdC* trace)
 {
@@ -68,8 +71,43 @@ int main() {
 		inp.c2 = (bool)(rand()%2);
 		inp.c3 = (bool)(rand()%2);
 		inp.c4 = (bool)(rand()%2);
+		
+		ctrlVar = rand() % 10;
+		
+		switch (ctrlVar){
+			case 0:
+				out.otp = (int)inp.a;
+				break;
+			case 1:
+				out.otp = (int)inp.b;
+				break;
+			case 2:
+				out.otp = (int)inp.c;
+				break;
+			case 3:
+				out.otp = (int)inp.d;
+				break;
+			case 4:
+				out.otp = (int)inp.e;
+				break;
+			case 5:
+				out.otp = (int)inp.f;
+				break;
+			case 6:
+				out.otp = (int)inp.g;
+				break;
+			case 7:
+				out.otp = (int)inp.h;
+				break;
+			case 8:
+				out.otp = (int)inp.i;
+				break;
+			case 9:
+				out.otp = (int)inp.j;
+				break;
+		}
 
-        //generate output package
+     /*   //generate output package
         if(!inp.c1) {
             if(!inp.c2) {
 				if(!inp.c3) {
@@ -106,7 +144,9 @@ int main() {
 			} else {
 				out.otp = (int)inp.j;
 			}
-        }
+        }  */
+		
+		
 
         //feed data
         top->a = (int)inp.a;
@@ -118,15 +158,29 @@ int main() {
         top->g = (int)inp.g;
         top->h = (int)inp.h;
         top->i = (int)inp.i;
-        top->j = (int)inp.j;
+        top->j = (int)inp.j;/*
         top->c1 = (int)inp.c1;
         top->c2 = (int)inp.c2;
         top->c3 = (int)inp.c3;
-        top->c4 = (int)inp.c4;
-        advance_sim(top, trace);
+        top->c4 = (int)inp.c4;*/
+		top->ctrlVar = inp.ctrlVar;
+		advance_sim(top, trace);
+        top->eval();
 
         if(top->otp != out.otp) {
-            std::cout << "Error!" << std::endl;
+            std::cout << "Error: ctrl = " << inp.ctrlVar << "; ";
+            std::cout << "inp.a = " << (uint16_t)inp.a << "; ";
+            std::cout << "inp.b = " << (uint16_t)inp.b << "; ";
+            std::cout << "inp.c = " << (uint16_t)inp.c << "; ";
+            std::cout << "inp.d = " << (uint16_t)inp.d << "; ";
+            std::cout << "inp.e = " << (uint16_t)inp.e << "; ";
+            std::cout << "inp.f = " << (uint16_t)inp.f << "; ";
+            std::cout << "inp.g = " << (uint16_t)inp.g << "; ";
+            std::cout << "inp.h = " << (uint16_t)inp.h << "; ";
+            std::cout << "inp.i = " << (uint16_t)inp.i << "; ";
+            std::cout << "inp.j = " << (uint16_t)inp.j << "; ";
+            std::cout << "top->otp = " << (uint16_t)top->otp << "; ";
+            std::cout << "out.otp = " << (uint16_t)out.otp << std::endl;
         }
 
         //sim iteration 
@@ -135,3 +189,4 @@ int main() {
 
     trace->close();
 }
+*/
