@@ -19,14 +19,23 @@ const uint32_t kSimIter = 100;
 uint32_t global_time = 0;
 
 struct input_package {
-	//input buses
-	bool a,b,c,d,e,f,g,h,i,j = false;
+	//input buses 9-bit inputs
+	unsigned int a0 : 9;
+	unsigned int a1 : 9;
+	unsigned int a2 : 9;
+	unsigned int a3 : 9;
+	unsigned int a4 : 9;
+	unsigned int a5 : 9;
+	unsigned int a6 : 9;
+	unsigned int a7 : 9;
+	unsigned int a8 : 9;
+	unsigned int a9 : 9;
 	//control switches
 	unsigned int ctrlVar : 4;
 };
 
 struct output_package {
-    uint8_t otp = 0;
+    unsigned int otp : 9;
 };
 
 
@@ -53,81 +62,81 @@ int main() {
     int iter = kSimIter;
     while(iter > 0)
     {
-        //generate input package
-        inp.a = (bool)(rand()%2);
-        inp.b = (bool)(rand()%2);
-        inp.c = (bool)(rand()%2);
-        inp.d = (bool)(rand()%2);
-        inp.e = (bool)(rand()%2);
-        inp.f = (bool)(rand()%2);
-        inp.g = (bool)(rand()%2);
-        inp.h = (bool)(rand()%2);
-        inp.i = (bool)(rand()%2);
-        inp.j = (bool)(rand()%2);
+		// generate input package for 9-bit inputs
+		inp.a0 = rand() % 512;
+		inp.a1 = rand() % 512;
+		inp.a2 = rand() % 512;
+		inp.a3 = rand() % 512;
+		inp.a4 = rand() % 512;
+		inp.a5 = rand() % 512;
+		inp.a6 = rand() % 512;
+		inp.a7 = rand() % 512;
+		inp.a8 = rand() % 512;
+		inp.a9 = rand() % 512;
 		
-	//control switches
-	inp.ctrlVar = rand() % 10;
-		
-	switch (inp.ctrlVar){
-		case 0:
-			out.otp = (int)inp.a;
-			break;
-		case 1:
-			out.otp = (int)inp.b;
-			break;
-		case 2:
-			out.otp = (int)inp.c;
-			break;
-		case 3:
-			out.otp = (int)inp.d;
-			break;
-		case 4:
-			out.otp = (int)inp.e;
-			break;
-		case 5:
-			out.otp = (int)inp.f;
-			break;
-		case 6:
-			out.otp = (int)inp.g;
-			break;
-		case 7:
-			out.otp = (int)inp.h;
-			break;
-		case 8:
-			out.otp = (int)inp.i;
-			break;
-		case 9:
-			out.otp = (int)inp.j;
-			break;
+		//control switches
+		inp.ctrlVar = rand() % 10;
+			
+		switch (inp.ctrlVar){
+			case 0:
+				out.otp = inp.a0;
+				break;
+			case 1:
+				out.otp = inp.a1;
+				break;
+			case 2:
+				out.otp = inp.a2;
+				break;
+			case 3:
+				out.otp = inp.a3;
+				break;
+			case 4:
+				out.otp = inp.a4;
+				break;
+			case 5:
+				out.otp = inp.a5;
+				break;
+			case 6:
+				out.otp = inp.a6;
+				break;
+			case 7:
+				out.otp = inp.a7;
+				break;
+			case 8:
+				out.otp = inp.a8;
+				break;
+			case 9:
+				out.otp = inp.a9;
+				break;
 		}
 
         //feed data
-        top->a = (int)inp.a;
-        top->b = (int)inp.b;
-        top->c = (int)inp.c;
-        top->d = (int)inp.d;
-        top->e = (int)inp.e;
-        top->f = (int)inp.f;
-        top->g = (int)inp.g;
-        top->h = (int)inp.h;
-        top->i = (int)inp.i;
-        top->j = (int)inp.j;
-	top->ctrlVar = inp.ctrlVar;
-	advance_sim(top, trace);
-        top->eval();
+        top->a0 = inp.a0;
+        top->a1 = inp.a1;
+        top->a2 = inp.a2;
+        top->a3 = inp.a3;
+        top->a4 = inp.a4;
+        top->a5 = inp.a5;
+        top->a6 = inp.a6;
+        top->a7 = inp.a7;
+        top->a8 = inp.a8;
+        top->a9 = inp.a9;
+		top->ctrlVar = inp.ctrlVar;
+		advance_sim(top, trace);
+        //top->eval();
 
         if(top->otp != out.otp) {
             std::cout << "Error: ctrl = " << inp.ctrlVar << "; ";
-            std::cout << "inp.a = " << (uint16_t)inp.a << "; ";
-            std::cout << "inp.b = " << (uint16_t)inp.b << "; ";
-            std::cout << "inp.c = " << (uint16_t)inp.c << "; ";
-            std::cout << "inp.d = " << (uint16_t)inp.d << "; ";
-            std::cout << "inp.e = " << (uint16_t)inp.e << "; ";
-            std::cout << "inp.f = " << (uint16_t)inp.f << "; ";
-            std::cout << "inp.g = " << (uint16_t)inp.g << "; ";
-            std::cout << "inp.h = " << (uint16_t)inp.h << "; ";
-            std::cout << "inp.i = " << (uint16_t)inp.i << "; ";
-            std::cout << "inp.j = " << (uint16_t)inp.j << "; ";
+            std::cout << "inp.a0 = " << (uint16_t)inp.a0 << "; ";
+            std::cout << "inp.a1 = " << (uint16_t)inp.a1 << "; ";
+            std::cout << "inp.a2 = " << (uint16_t)inp.a2 << "; ";
+            std::cout << "inp.a3 = " << (uint16_t)inp.a3 << "; ";
+            std::cout << "inp.a4 = " << (uint16_t)inp.a4 << "; ";
+            std::cout << "inp.a5 = " << (uint16_t)inp.a5 << "; ";
+            std::cout << "inp.a6 = " << (uint16_t)inp.a6 << "; ";
+            std::cout << "inp.a7 = " << (uint16_t)inp.a7 << "; ";
+            std::cout << "inp.a8 = " << (uint16_t)inp.a8 << "; ";
+            std::cout << "inp.a9 = " << (uint16_t)inp.a9 << "; ";
             std::cout << "top->otp = " << (uint16_t)top->otp << "; ";
             std::cout << "out.otp = " << (uint16_t)out.otp << std::endl;
         }
