@@ -19,7 +19,7 @@ const uint32_t kSimIter = 100;
 uint32_t global_time = 0;
 
 struct input_package {
-	//input buses 9-bit inputs
+	// 9-bit input busses
 	unsigned int a0 : 9;
 	unsigned int a1 : 9;
 	unsigned int a2 : 9;
@@ -30,11 +30,13 @@ struct input_package {
 	unsigned int a7 : 9;
 	unsigned int a8 : 9;
 	unsigned int a9 : 9;
-	//control switches
+	
+	// 4 control switches
 	unsigned int ctrlVar : 4;
 };
 
 struct output_package {
+	// 9-bit output bus
     unsigned int otp : 9;
 };
 
@@ -76,7 +78,8 @@ int main() {
 		
 		//control switches
 		inp.ctrlVar = rand() % 10;
-			
+		
+		// select input by control switches
 		switch (inp.ctrlVar){
 			case 0:
 				out.otp = inp.a0;
@@ -125,6 +128,7 @@ int main() {
 		advance_sim(top, trace);
         //top->eval();
 
+		// detect error
         if(top->otp != out.otp) {
             std::cout << "Error: ctrl = " << inp.ctrlVar << "; ";
             std::cout << "inp.a0 = " << (uint16_t)inp.a0 << "; ";
