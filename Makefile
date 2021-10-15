@@ -1,4 +1,4 @@
-.PHONY: all lint alu mux fsm run_alu run_mux clean
+.PHONY: all lint alu mux fsm run_alu run_mux run_fsm clean
 
 all:
 	@echo "Select set of tests to run"
@@ -26,7 +26,7 @@ run_alu: alu
 run_mux: mux
 	./obj_dir/Vmux
 	
-run_mux: mux
+run_fsm: fsm
 	./obj_dir/Vfsm	
 	
 clean:
