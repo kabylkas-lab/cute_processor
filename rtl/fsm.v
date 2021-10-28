@@ -46,28 +46,34 @@ always@ ( * ) begin
 	case ( CurrentState )
 		STATE_Initial : begin
 			if (!a) NextState = STATE_1;
+			unlck = 0;
 		end
 		STATE_1 : begin
 			if (a) NextState = STATE_2;
 			else NextState = STATE_Initial;
+			unlck = 0;
 		end
 		STATE_2 : begin
 			if (!a) NextState = STATE_3;
 			else NextState = STATE_Initial;
+			unlck = 0;
 		end
 		STATE_3 : begin
 			if (a) NextState = STATE_4;
 			else NextState = STATE_Initial;
+			unlck = 0;
 		end
 		STATE_4 : begin
 			if (a) NextState = STATE_5 ;
 			else NextState = STATE_Initial ;
+			unlck = 0;
 		end
 		STATE_5: begin
 			unlck=1;
 		end
 		STATE_6: begin
 			NextState = STATE_Initial;
+			unlck = 0;
 		end
 		/*
 		STATE_6_PlaceHolder : begin
@@ -76,6 +82,7 @@ always@ ( * ) begin
 		*/
 		STATE_7_PlaceHolder : begin
 			NextState = STATE_Initial;
+			unlck = 0;
 		end
 		default : begin
 			unlck = 0;
