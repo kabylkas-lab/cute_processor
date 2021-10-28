@@ -15,7 +15,7 @@
 
 using dut_type = Vfsm;
 
-const uint32_t kSimIter = 15;
+const uint32_t kSimIter = 11;
 uint32_t global_time = 0;
 
 struct input_package {
@@ -47,75 +47,37 @@ int main() {
     input_package inp;
     output_package out;
 
-    /*
-		#define STATE_Initial
-    #define State1 2
-    #define State2 3
-    #define State3 4
-    #define State4 5
-    #define State5 6
-    */
-
-		int sasa;
+    int sasa;
     int iter = kSimIter;
-		int i=0;
-		int a1[15]={0,1,0,1,1};
-		while(iter > 0)
+	int i=0;
+	int a1[5]={0,1,0,1,1};
+    int b[5];
+	while(iter > 0)
     {
-		// generate input package
-
-
 		inp.clk = global_time % 2;
 		switch(inp.clk){
-
 			case 0:
 			      inp.a = a1[i];
-						switch(sasa){
-							case 0:
-											if(inp.a = 0) {sasa = 1;}
-											else if(inp.a = 1) {sasa = 0;}
-							break;
-							case 1:
-											if(inp.a = 1) {sasa = 2;}
-											else if(inp.a = 0) {sasa = 0;}
-							break;
-							case 2:
-											if(inp.a = 0) {sasa = 3;}
-											else if(inp.a = 1) {sasa = 0;}
-							break;
-							case 3:
-											if(inp.a = 1) {sasa = 4;}
-											else if(inp.a = 0) {sasa = 0;}
-							break;
-							case 4:
-											if(inp.a = 1) {sasa = 5;}
-											else if(inp.a = 0) {sasa = 0;}
-							break;
-							case 5:
-											out.unlck=1;
-							break;
-						  default:
-							        out.unlck = 0;
-					}
+                    b[i] = inp.a;
 					i++;
 					top->a = inp.a;
-
-			break;
+                    break;
+            case 1:
+                if (b[0]==a1[0]&&b[1]==a1[1]&&b[2]==a1[2]&&b[3]==a1[3]&&b[4]==a1[4]) {out.unlck = 1;}
+                else {out.unlck = 0;}
+                break;
 		}
 
-
-        //feed data
-
-				top->clk = inp.clk;
+	    top->clk = inp.clk;
 
 		advance_sim(top, trace);
-        //top->eval();
+        top->eval();
 
 		// detect error
         if(top->unlck != out.unlck) {
-						std::cout << "clk" << inp.clk << "; ";
-						std::cout << "iter" << iter << "; ";
-						std::cout << "inp.a = " << (uint16_t)inp.a << "; ";
+			std::cout << "clk" << inp.clk << "; ";
+			std::cout << "iter" << iter << "; ";
+			std::cout << "inp.a = " << (uint16_t)inp.a << "; ";
             std::cout << "top->unlck = " << (uint16_t)top->unlck << "; ";
             std::cout << "out.unlck = " << (uint16_t)out.unlck << std::endl;
         }
