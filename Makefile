@@ -1,4 +1,4 @@
-.PHONY: all lint alu mux fsm run_alu run_mux run_fsm clean
+.PHONY: all lint alu mux fsm run_alu run_mux run_fsm cufsm clean
 
 all:
 	@echo "Select set of tests to run"
@@ -19,6 +19,10 @@ mux:
 fsm:
 	verilator --assert -I./rtl --Wall --trace --cc ./rtl/fsm.v --exe tests/fsm_tb.cpp
 	make -C obj_dir/ -f Vfsm.mk Vfsm
+
+cufsm:
+	verilator --assert -I./rtl --Wall --trace --cc ./rtl/cufsm.v --exe tests/cufsm_tb.cpp
+	make -C obj_dir/ -f Vcufsm.mk Vcufsm
 	
 run_alu: alu
 	./obj_dir/Valu
@@ -28,6 +32,9 @@ run_mux: mux
 	
 run_fsm: fsm
 	./obj_dir/Vfsm	
+	
+run_cufsm: cufsm
+	./obj_dir/Vcufsm	
 	
 clean:
 	rm -rf *.vcd
