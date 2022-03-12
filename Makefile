@@ -1,4 +1,4 @@
-.PHONY: all lint alu mux fsm run_alu run_mux run_fsm cufsm clean
+.PHONY: all lint alu mux fsm run_alu run_mux run_fsm cufsm run_cufsm clean
 
 all:
 	@echo "Select set of tests to run"
