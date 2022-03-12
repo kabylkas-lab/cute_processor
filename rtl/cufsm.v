@@ -17,10 +17,13 @@ module cufsm(
     output reg [3:0] mux,
     output reg alu,
     output reg [7:0] rx,
-    output reg done
+    output reg done,
+    output reg IRen
     // -------------------------------------------------------------------------
 
     );
+
+assign IRen = 1;
 
 localparam STATE_Initial = 3'd0,
     STATE_alu1 = 3'd1, // alu = 0
@@ -30,6 +33,7 @@ localparam STATE_Initial = 3'd0,
     STATE_5_PlaceHolder = 3'd5;
     //STATE_6_placeHolder = 3'd6,
     //STATE_7_PlaceHolder = 3'd7;
+    
 
 
 reg [2:0] CurrentState;
@@ -65,8 +69,8 @@ always@ ( * ) begin
             mux = 4'd0;
             alu = 0;
             done = 0;
-            if (cmd[1]) NextState = STATE_mv1;
-            else NextState = STATE_alu1;
+            if (cmd==0'b010) NextState = STATE_mv1;
+            else NextState = STATE_alu1; 
         end
         STATE_alu1 : begin
             mux = adr1+1;
@@ -96,7 +100,7 @@ always@ ( * ) begin
             done = 1;
         end
         STATE_mv1 : begin
-            mux = adr1 +1;
+            mux = adr1 + 4'd1;
             rx[adr1] = 1;
             rx[adr2] = 1;
             done = 1;
