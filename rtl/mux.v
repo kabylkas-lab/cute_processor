@@ -5,19 +5,19 @@ module mux(
     // ----------------------------------------------------------------------------------
     // Inputs
     // ----------------------------------------------------------------------------------
-    input wire [8:0] a0,
-    input wire [8:0] a1,
-    input wire [8:0] a2,
-    input wire [8:0] a3,
-    input wire [8:0] a4,
-    input wire [8:0] a5,
-    input wire [8:0] a6,
-    input wire [8:0] a7,
-    input wire [8:0] a8,
-    input wire [8:0] a9,
+    input wire signed [8:0] a0,
+    input wire signed [8:0] a1,
+    input wire signed [8:0] a2,
+    input wire signed [8:0] a3,
+    input wire signed [8:0] a4,
+    input wire signed [8:0] a5,
+    input wire signed [8:0] a6,
+    input wire signed [8:0] a7,
+    input wire signed [8:0] a8,
+    input wire signed [8:0] a9,
     input wire [3:0] ctrlVar,
     // ----------------------------------------------------------------------------------
-    output reg [8:0] otp        // output
+    output reg signed [8:0] otp        // output
     );
 
 // ------------------------------------------------------------------------------------------
