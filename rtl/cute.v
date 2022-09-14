@@ -1,4 +1,4 @@
-/* verilator lint_off PINMISSING */
+
 // -----------------------------------------------------------------------------
 // Cute-Processor
 // -----------------------------------------------------------------------------
@@ -26,9 +26,11 @@ module cute(
 
 reg signed [8:0] a1, a2, a3, a4, a5, a6, a7, a8; // registers output
 wire signed [8:0] aluo,Ao,Go; // logic outputs
-wire [3:0] mux; // mux control input
-wire A, G, alu; // enable logic
-wire [7:0] rx; // enable registers
+wire [3:0] mux;     // mux control input
+wire A, G, alu;     // enable logic
+wire [7:0] rx;      // enable registers
+
+wire ZF, SF, OF;    // ALU flags
 
 
 initial begin
@@ -57,8 +59,7 @@ regn R6( .clk, .enable (rx[2]), .a0 (bus), .reg0 (a3) );
 regn R7( .clk, .enable (rx[1]), .a0 (bus), .reg0 (a2) );
 regn R8( .clk, .enable (rx[0]), .a0 (bus), .reg0 (a1) );
 
-cufsm ControlUnitFSM(.ir (DIN), .Run, .Resetn, .clk, .a (A), .g (G), .mux, .alu, 
-                        .rx, .done, .jmp);
+cufsm ControlUnitFSM(.ir (DIN), .Run, .Resetn, .clk, .ZF, .SF, .OF, .a (A), .g (G), .mux, .alu, .rx, .done, .jmp);
     
 mux Multiplexer(.a0 (DIN), .a1, .a2, .a3, .a4, .a5, .a6, .a7, .a8, .a9 (Go), .ctrlVar (mux), .otp (bus));
 
@@ -66,7 +67,7 @@ regn regA( .clk, .enable (A), .a0 (bus), .reg0 (Ao) );
 
 regn regG( .clk, .enable (G), .a0 (aluo), .reg0 (Go) );
 
-alu ArithmeticLogicUnit( .a (Ao), .b (bus), .c (aluo), .op (alu) );
+falu ArithmeticLogicUnit( .clk, .a (Ao), .b (bus), .c (aluo), .ZF, .SF, .OF, .op (alu) );
 
 
 endmodule

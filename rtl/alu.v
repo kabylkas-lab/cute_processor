@@ -1,4 +1,4 @@
-module alu #(parameter WORD_SIZE = 8) (
+module alu #(parameter WORD_SIZE = 9) (
     // Data input.
     input     [WORD_SIZE-1:0]   a,
     input     [WORD_SIZE-1:0]   b,

@@ -112,9 +112,13 @@ int main() {
                         out.bus = mem;
                         reg[adr1] = mem;
                     }
-                    else if (cmd == 0b100)
+                    else if (cmd==0b100|cmd==0b110|cmd==0b111)
                     {
                         out.bus = mem;
+                    }
+                    else if (cmd == 0b101)
+                    {
+                        out.bus = reg[adr2];
                     }
 
 
@@ -137,10 +141,10 @@ int main() {
                         break;
                     }
                 }
-                break;
     }
     top->eval();
     advance_sim(top, trace);
+    if(inp.Resetn==1) break;
     iter--;
     }
     trace->close();

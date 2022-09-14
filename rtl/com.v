@@ -41,6 +41,20 @@ alu ArithmeticLogicUnit( .a (Z), .b (done), .c (aluo), .op (add) );
 twomux TwoToOneMultiplexer( .a0 (aluo), .a1 (address), .ctrlVar, .otp );
 
 reg [8:0] mem [0:9];
+integer     fd;  
+   
+
+integer i; 
+
+initial begin  
+    fd = $fopen("/home/terrofont/cute_processor/cmd/instructions.txt", "r");  
+    i = 0; 
+    while (! $feof(fd)) begin  
+        $fscanf(fd,"%b\n",mem[i]);
+        i=i+1;
+    end
+    $fclose(fd);  
+end
 //assign mem[0] = 9'b011000110;
 //assign mem[1] = 9'b011001001;
 //assign mem[2] = 9'b011010101;
@@ -49,6 +63,7 @@ reg [8:0] mem [0:9];
 //assign a6 = 9'd250;
 //assign a7 = 9'd8;
 //assign a8 = 9'd300;
+/*
 assign mem[0] = 9'b001000001;
 assign mem[1] = 9'b001000001;
 assign mem[2] = 9'b000010011;
@@ -58,6 +73,7 @@ assign mem[5] = 9'b000101100;
 assign mem[6] = 9'b010100101;
 assign mem[7] = 9'b100000000;;
 assign mem[8] = 9'b100000000;
+*/
 
 always@ ( posedge clk )  begin
     if ( Resetn || done ) begin

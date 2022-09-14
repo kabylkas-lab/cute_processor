@@ -33,7 +33,7 @@ case (c_internal)
     9'd0: ZF <= 1;
     default: ZF <= 0;
     endcase
-    OF <= ((c_internal[width-1]&!(a[width-1])&!(b[width-1]))|(!(c_internal[width-1])&(a[width-1])&(b[width-1])));
+    OF <= (c_internal[width-1]&!(a[width-1])&!(b[width-1])|!(c_internal[width-1])&(a[width-1])&(b[width-1]));
     SF <= c_internal[width-1];
 end
 
