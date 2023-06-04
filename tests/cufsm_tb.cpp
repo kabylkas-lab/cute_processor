@@ -8,7 +8,7 @@
 // C++ libraries.
 #include "stdlib.h"
 #include <iostream>
-#include <math>
+#include <math.h>
 
 // Verilator libraries.
 #include "verilated.h"
